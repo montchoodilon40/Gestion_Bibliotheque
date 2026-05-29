@@ -1,0 +1,137 @@
+@model IEnumerable<Gestion_Bibliotheque.Models.Livre>
+
+@{
+    ViewData["Title"] = "Gestion des Livres";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2 class="fw-bold text-primary">
+            Gestion des Livres
+        </h2>
+
+        <a asp-action="Create" class="btn btn-success">
+            + Ajouter un Livre
+        </a>
+
+    </div>
+
+    <div class="card shadow">
+
+        <div class="card-body">
+            <div class="mb-3">
+
+                <input type="text"
+                       id="searchInput"
+                       class="form-control"
+                       placeholder="Rechercher un livre...">
+
+            </div>
+
+            <table class="table table-bordered table-hover table-striped align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Titre</th>
+                        <th>Auteur</th>
+                        <th>Catégorie</th>
+                        <th>Quantité</th>
+                        <th>Disponibilité</th>
+                        <th width="220">Actions</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="livresTable">
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>@item.id_livres</td>
+
+                            <td>@item.titre</td>
+
+                            <td>@item.auteur</td>
+
+                            <td>@item.categorie</td>
+
+                            <td>@item.quantite</td>
+
+                            <td>
+                                @if (item.disponibilite)
+                                {
+                                    <span class="badge bg-success">
+                                        Disponible
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">
+                                        Indisponible
+                                    </span>
+                                }
+                            </td>
+
+                            <td>
+
+                                <a asp-action="Edit"
+                                   asp-route-id="@item.id_livres"
+                                   class="btn btn-warning btn-sm">
+                                    Modifier
+                                </a>
+
+                                <a asp-action="Details"
+                                   asp-route-id="@item.id_livres"
+                                   class="btn btn-info btn-sm text-white">
+                                    Détails
+                                </a>
+
+                                <a asp-action="Delete"
+                                   asp-route-id="@item.id_livres"
+                                   class="btn btn-danger btn-sm">
+                                    Supprimer
+                                </a>
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+            <script>
+
+                            document.getElementById("searchInput").addEventListener("keyup", function () {
+
+                                let value = this.value.toLowerCase();
+
+                                let rows = document.querySelectorAll("#livresTable tr");
+
+                                rows.forEach(function (row) {
+
+                                    let text = row.innerText.toLowerCase();
+
+                                    if (text.includes(value)) {
+                                        row.style.display = "";
+                                    }
+                                    else {
+                                        row.style.display = "none";
+                                    }
+
+                                });
+
+                            });
+
+            </script>
+
+        </div>
+
+    </div>
+
+</div>

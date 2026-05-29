@@ -1,0 +1,109 @@
+@model IEnumerable<Gestion_Bibliotheque.Models.Abonnement>
+
+@{
+    ViewData["Title"] = "Abonnements";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between mb-3">
+
+        <h2 class="text-primary">
+            Gestion des Abonnements
+        </h2>
+
+        <a asp-action="Create"
+           class="btn btn-success">
+            Nouvel Abonnement
+        </a>
+
+    </div>
+
+    <table class="table table-hover table-bordered shadow">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Date Début</th>
+
+                <th>Type</th>
+
+                <th>Date Fin</th>
+
+                <th>Membre</th>
+
+                <th>Statut</th>
+
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                bool expire =
+                item.date_finabonnement < DateTime.Now;
+
+                <tr>
+
+                    <td>@item.id_abonnement</td>
+
+                    <td>
+                        @item.date_debutabonnement.ToShortDateString()
+                    </td>
+
+                    <td>@item.type_abonnement</td>
+
+                    <td>
+                        @item.date_finabonnement.ToShortDateString()
+                    </td>
+
+                    <td>@item.id_membres</td>
+
+                    <td>
+
+                        @if (!expire)
+                        {
+                            <span class="badge bg-success">
+                                ACTIF
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">
+                                EXPIRÉ
+                            </span>
+                        }
+
+                    </td>
+
+                    <td>
+
+                        <a asp-action="Edit"
+                           asp-route-id="@item.id_abonnement"
+                           class="btn btn-warning btn-sm">
+                            Modifier
+                        </a>
+
+                        <a asp-action="Delete"
+                           asp-route-id="@item.id_abonnement"
+                           class="btn btn-danger btn-sm">
+                            Supprimer
+                        </a>
+
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>

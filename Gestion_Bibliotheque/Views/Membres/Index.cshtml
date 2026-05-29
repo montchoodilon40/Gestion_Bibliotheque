@@ -1,0 +1,134 @@
+@model IEnumerable<Gestion_Bibliotheque.Models.Membre>
+
+@{
+    ViewData["Title"] = "Gestion des Membres";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2 class="fw-bold text-primary">
+            Gestion des Membres
+        </h2>
+
+        <a asp-action="Create" class="btn btn-success">
+            + Ajouter un membre
+        </a>
+
+    </div>
+
+    <!-- BARRE DE RECHERCHE -->
+
+    <div class="mb-3">
+
+        <input type="text"
+               id="searchInput"
+               class="form-control"
+               placeholder="Rechercher un membre...">
+
+    </div>
+
+    <!-- TABLEAU -->
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <table class="table table-bordered table-hover table-striped align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Adresse</th>
+                        <th width="220">Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="membresTable">
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>@item.id_membres</td>
+
+                            <td>@item.nom_membres</td>
+
+                            <td>@item.prenom_membres</td>
+
+                            <td>@item.email_membres</td>
+
+                            <td>@item.tel_membres</td>
+
+                            <td>@item.adresse_membres</td>
+
+                            <td>
+
+                                <a asp-action="Edit"
+                                   asp-route-id="@item.id_membres"
+                                   class="btn btn-warning btn-sm">
+                                    Modifier
+                                </a>
+
+                                <a asp-action="Details"
+                                   asp-route-id="@item.id_membres"
+                                   class="btn btn-info btn-sm text-white">
+                                    Détails
+                                </a>
+
+                                <a asp-action="Delete"
+                                   asp-route-id="@item.id_membres"
+                                   class="btn btn-danger btn-sm">
+                                    Supprimer
+                                </a>
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- RECHERCHE DYNAMIQUE -->
+
+<script>
+
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+
+        let value = this.value.toLowerCase();
+
+        let rows = document.querySelectorAll("#membresTable tr");
+
+        rows.forEach(function (row) {
+
+            let text = row.innerText.toLowerCase();
+
+            if (text.includes(value)) {
+                row.style.display = "";
+            }
+            else {
+                row.style.display = "none";
+            }
+
+        });
+
+    });
+
+</script>

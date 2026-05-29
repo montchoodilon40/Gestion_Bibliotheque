@@ -1,0 +1,84 @@
+﻿@model Gestion_Bibliotheque.Models.Emprunt
+
+@{
+    ViewData["Title"] = "Modifier Emprunt";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <h2 class="text-primary mb-4">
+                Modifier Emprunt
+            </h2>
+
+            <form asp-action="Edit">
+
+                <input type="hidden"
+                       asp-for="id_emprunt" />
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        ID Membre
+                    </label>
+
+                    <input asp-for="id_membres"
+                           class="form-control" />
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        ID Livre
+                    </label>
+
+                    <input asp-for="id_livres"
+                           class="form-control" />
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Date Emprunt
+                    </label>
+
+                    <input asp-for="date_emprunt"
+                           type="date"
+                           class="form-control" />
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Date Retour
+                    </label>
+
+                    <input asp-for="date_retourprevue"
+                           type="date"
+                           class="form-control" />
+
+                </div>
+
+                <button type="submit"
+                        class="btn btn-warning">
+                    Enregistrer
+                </button>
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+                    Retour
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

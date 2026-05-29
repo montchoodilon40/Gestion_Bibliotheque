@@ -1,0 +1,93 @@
+﻿@model Gestion_Bibliotheque.Models.Emprunt
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-danger">
+
+        @ViewBag.Message
+
+    </div>
+}
+
+@{
+    ViewData["Title"] = "Nouvel Emprunt";
+}
+
+<div class="container mt-4">
+
+    <h2 class="fw-bold text-primary mb-4">
+        📥 Nouvel Emprunt
+    </h2>
+
+    <div class="card shadow p-4">
+
+        <form asp-action="Create">
+
+            <!-- LIVRE -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Livre
+                </label>
+
+                <select asp-for="id_livres"
+                        class="form-control"
+                        asp-items="ViewBag.Livres">
+
+                    <option value="">-- Choisir un livre --</option>
+
+                </select>
+
+            </div>
+
+            <!-- MEMBRE -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Membre
+                </label>
+
+                <select asp-for="id_membres"
+                        class="form-control"
+                        asp-items="ViewBag.Membres">
+
+                    <option value="">-- Choisir un membre --</option>
+
+                </select>
+
+            </div>
+
+            <!-- DATE RETOUR -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Date retour prévue
+                </label>
+
+                <input asp-for="date_retourprevue"
+                       type="date"
+                       class="form-control" />
+
+            </div>
+
+            <button type="submit"
+                    class="btn btn-success">
+
+                Enregistrer
+
+            </button>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                Retour
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>

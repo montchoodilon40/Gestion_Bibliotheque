@@ -1,0 +1,55 @@
+@model Gestion_Bibliotheque.Models.Membre
+
+@{
+    ViewData["Title"] = "Ajouter un membre";
+}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4 text-success fw-bold">
+        ➕ Ajouter un nouveau membre
+    </h2>
+
+    <div class="card shadow p-4">
+
+        <form asp-action="Create">
+
+            <div class="mb-3">
+                <label class="form-label">Nom</label>
+                        <input asp-for="nom_membres" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Prénom</label>
+                        <input asp-for="prenom_membres" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                        <input asp-for="email_membres" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Téléphone</label>
+                        <input asp-for="tel_membres" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Adresse</label>
+                        <input asp-for="adresse_membres" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-success">
+                Enregistrer
+            </button>
+
+            <a asp-action="Index" class="btn btn-secondary">
+                Retour
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+       

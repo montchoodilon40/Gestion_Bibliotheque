@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Gestion_Bibliotheque.Models.Emprunt>
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">
+
+        @TempData["Message"]
+
+    </div>
+}
+
+@{
+    ViewData["Title"] = "Liste des Emprunts";
+}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4 text-primary fw-bold">
+        📥 Liste des Emprunts
+    </h2>
+
+    <a asp-action="Create" class="btn btn-success mb-3">
+        ➕ Nouvel emprunt
+    </a>
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <table class="table table-striped table-hover">
+
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Livre</th>
+                        <th>Membre</th>
+                        <th>Date Emprunt</th>
+                        <th>Date Retour prévue</th>
+                        <th>Date Retour effective</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.id_emprunt</td>
+                            <td>@item.Livre.titre</td>
+                            <td>@item.Membre.nom_membres</td>
+                            <td>@item.date_emprunt</td>
+                            <td>@item.date_retourprevue</td>
+                            <td>@item.date_retoureffective</td>
+                            <td>@item.statut</td>
+
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.id_emprunt" class="btn btn-warning btn-sm">
+                                    Modifier
+                                </a>
+
+                                <a asp-action="Delete" asp-route-id="@item.id_emprunt" class="btn btn-danger btn-sm">
+                                    Supprimer
+                                </a>
+
+                                @if (item.statut != "Retourné")
+                                {
+                                    <a asp-action="Retourner"
+                                       asp-route-id="@item.id_emprunt"
+                                       class="btn btn-success btn-sm">
+
+                                        Retour
+
+                                    </a>
+                                    <a asp-action="GenererPenalite"
+                                       asp-route-id="@item.id_emprunt"
+                                       class="btn btn-danger btn-sm">
+
+                                        Pénalité
+
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">
+                                        Déjà retourné
+                                    </span>
+                                }
+                                <a asp-action="Retourner"
+                                   asp-route-id="@item.id_emprunt"
+                                   class="btn btn-success btn-sm">
+
+                                    Retour
+
+                                </a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

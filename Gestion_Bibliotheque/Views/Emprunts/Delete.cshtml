@@ -1,0 +1,66 @@
+﻿@model Gestion_Bibliotheque.Models.Emprunt
+
+@{
+    ViewData["Title"] = "Supprimer Emprunt";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <h3 class="text-danger mb-4">
+                Supprimer cet emprunt ?
+            </h3>
+
+            <dl class="row">
+
+                <dt class="col-sm-3">
+                    ID
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.id_emprunt
+                </dd>
+
+                <dt class="col-sm-3">
+                    Date Emprunt
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.date_emprunt
+                </dd>
+
+                <dt class="col-sm-3">
+                    Date Retour
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.date_retourprevue
+                </dd>
+
+            </dl>
+
+            <form asp-action="Delete">
+
+                <input type="hidden"
+                       asp-for="id_emprunt" />
+
+                <button type="submit"
+                        class="btn btn-danger">
+                    Supprimer
+                </button>
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+                    Retour
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

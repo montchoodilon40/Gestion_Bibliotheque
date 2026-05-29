@@ -1,0 +1,52 @@
+@model Gestion_Bibliotheque.Models.Penalite
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Penalite</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.date_penalite)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.date_penalite)
+        </dd>
+    </dl>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.raison_penalite)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.raison_penalite)
+        </dd>
+    </dl>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.montant_penalite)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.montant_penalite)
+        </dd>
+    </dl>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.id_emprunt)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.id_emprunt)
+        </dd>
+    </dl>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Emprunt)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Emprunt)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.id_penalite">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
