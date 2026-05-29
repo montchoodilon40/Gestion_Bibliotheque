@@ -1,13 +1,16 @@
-# Étape 1 : Build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-COPY . ./
+# copier tout le repo
+COPY . .
 
+# aller dans le dossier du projet
+WORKDIR /app/Gestion_Bibliotheque
+
+# restore + publish
 RUN dotnet restore
 RUN dotnet publish -c Release -o /out
 
-# Étape 2 : Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 
