@@ -1,16 +1,21 @@
-# Étape 1 : Build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /app
+WORKDIR /src
 
-COPY . ./
+# Copier le projet
+COPY Gestion_Bibliotheque/Gestion_Bibliotheque.csproj Gestion_Bibliotheque/
 
-RUN dotnet restore
-RUN dotnet publish -c Release -o /out
+# Restaurer le projet explicitement
+RUN dotnet restore Gestion_Bibliotheque/Gestion_Bibliotheque.csproj
 
-# Étape 2 : Runtime
+# Copier tout le code
+COPY . .
+
+WORKDIR /src/Gestion_Bibliotheque
+RUN dotnet publish -c Release -o /app/publish
+
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 
-COPY --from=build /out .
+COPY --from=build /app/publish .
 
 ENTRYPOINT ["dotnet", "Gestion_Bibliotheque.dll"]
